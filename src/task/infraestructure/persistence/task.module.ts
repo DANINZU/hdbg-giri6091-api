@@ -1,7 +1,7 @@
 
 import { Module } from "@nestjs/common";
-import { TaskController } from "@/task/infraestructure/controllers/task.controller";
-import { CreateTaskUseCase } from "@/task/aplication/create-task.use-case";
+import { TaskController } from "@/task/infraestructure/controllers/dtos/task.controller";
+import { CreateTaskUseCase } from "@/task/application/create-task.use-case";
 import { ITaskRepositoryToken } from "@/task/domain/task.repository.interface";
 import { TaskRepositoryImpl } from "@/task/infraestructure/persistence/task.repository.impl";
 

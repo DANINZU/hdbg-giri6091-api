@@ -6,12 +6,12 @@ export class Task {
         public readonly id: string,
         public title: string,
         public description: string,
-        public status: 'PENDIENTE' | 'IN_PROGRESS' | 'COMPLETED',
+        public status: 'PENDING' | 'IN_PROGRESS' | 'COMPLETED',
         public createdAt: Date
     ) {}
 
     //Lógica en la capa de dominio
-    complete() {
+    complete(){
         this.status = 'COMPLETED';
     }
 }
