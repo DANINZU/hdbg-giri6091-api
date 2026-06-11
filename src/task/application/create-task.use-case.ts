@@ -1,14 +1,26 @@
-//Capaa de aplicacion (Caso de uso)
-import { Inject, Injectable } from '@nestjs/common';
-import type { ITaskRepository } from '../domain/task.repository.interface';
-import { ITaskRepositoryToken } from '../domain/task.repository.interface';
+// Capa de aplicación
+import { Inject, Injectable } from "@nestjs/common";
+import type { ITaskRepository } from "../domain/task.repository.interface";
+import { ITaskRepositoryToken } from "../domain/task.repository.interface";
+import { Task } from "../domain/task.entity";
+
 
 @Injectable()
-export class CreateTaskUseCase {
+export class CreateTaskUseCase{
     constructor(
-        @Inject(ITaskRepositoryToken)
-        private readonly taskRepository: ITaskRepository,
-    ) {}
-}
+        @Inject('ITaskRepositoryToken')
+        private readonly taskRepository: ITaskRepository
+    ){}
+    async execute(title: string, description: string): Promise<Task> {
+        const crypto = await import('crypto'); //Genera un ID único para la tarea
+        const task = new Task(
+            crypto.randomUUID(),
+            title,
+            description,
+            'PENDING',
+            new Date(),
 
-//! git commit -m "init: proyecto inicial y infraestrucutura limpia en el caso de uso task"
+        );
+        return await this.taskRepository.create(task);
+    }
+}
