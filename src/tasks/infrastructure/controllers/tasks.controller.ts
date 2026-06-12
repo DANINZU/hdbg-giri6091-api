@@ -63,3 +63,7 @@ export class TasksController {
 
 
 }
+
+//git add .
+//git commit -m "Implementacion completa del CRUD de tareas"
+//git push 
