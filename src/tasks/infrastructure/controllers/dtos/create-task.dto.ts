@@ -6,11 +6,11 @@ export class CreateTaskDto {
     @IsNotEmpty()
     @MinLength(3)
     @MaxLength(100)
-    title !: string;
-
+    title!: string;
+    
     @IsString()
     @IsNotEmpty()
     @MinLength(3)
-    @MaxLength(100)
-    description !: string;
+    @MaxLength(200)
+    description!: string;
 }

@@ -1,19 +1,17 @@
-//! Dominio: Capa de datos puros 
-//! Entity: MOdelo de datos 
-//! 
+//! Dominio: Capa de datos puros
+//! Entity: Modelo de datos
 
 export class Task {
     constructor(
         public readonly id: string,
         public title: string,
         public description: string,
-        public status: 'PENDING' | 'IN_PROGRESS' | 'COMPLED',
-        public createdAt: Date
-    ){}
+        public status: 'PENDING' | 'IN_PROGRESS' | 'COMPLETED',
+        public createdAt: Date      
+    ) { }
 
-    // Logica en la capa de dominio 
-    complete(){
-        this.status = 'COMPLED';
+    // Lógica en la capa de dominio
+    complete() {
+        this.status = 'COMPLETED';
     }
-
 }
