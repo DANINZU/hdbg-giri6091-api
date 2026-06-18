@@ -41,3 +41,8 @@ bootstrap();
 //! git commit -m "fix: Escrutura de tareas y listado disponible"
 
 //? npm i --save @nestjs/swagger
+
+//! Uso de prima ORM
+//? npm i -D prisma
+//? npm i @prisma/client
+//? npx prisma init --datasource-provider postgresql
