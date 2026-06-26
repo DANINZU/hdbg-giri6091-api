@@ -12,7 +12,7 @@ export class TaskRepositoryPrismaImpl implements ITaskRepository {
         const { id, ...data } = task;
         const createdTask = await this.prisma.task.create({
             data: data
-        }) as Task;
+        })as Task;
 
         return createdTask;
         
@@ -20,21 +20,40 @@ export class TaskRepositoryPrismaImpl implements ITaskRepository {
     }
     async findAll(): Promise<Task[]> {
         const tasks = await this.prisma.task.findMany({
-            orderBy: { createdAt: 'desc' }
+            orderBy: {createdAt: 'desc'}
         }) as Task[];
 
-        //! git commit -m "Migracion del repositorio a prisma"
+        //! git commit -m "Migración del repositorio a prisma"
 
         return tasks;
+
     }
-    findById(id: number): Promise<Task | null> {
-        throw new Error("Method not implemented.");
+    async findById(id: number): Promise<Task | null> {
+        const task = await this.prisma.task.findUnique({
+            where: { id }
+        }) as Task | null;
+
+        return task;
     }
-    update(task: Task): Promise<Task> {
-        throw new Error("Method not implemented.");
+
+    async update(task: Task): Promise<Task> {
+        const updated = await this.prisma.task.update({
+            where: { id: task.id },
+            data: {
+                title: task.title,
+                description: task.description,
+                status: task.status,
+            }
+        }) as Task;
+
+        return updated; 
     }
-    delete(id: number): Promise<boolean> {
-        throw new Error("Method not implemented.");
+    async delete(id: number): Promise<boolean> {
+        try {
+            await this.prisma.task.delete({ where: { id } });
+            return true;
+        } catch (error) {
+            return false;
+        }
     }
-    
 }
